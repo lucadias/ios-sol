@@ -1,10 +1,10 @@
 # Braindump Solutions
 
- <i style=float:right;>Luca Dias</i> <br>
+ <i style=float:right;>dias</i> <br>
 
 ## 1. Kommunikation
 
-Es ist je eine URL fur den Abruf von XML- und JSON-Daten gegeben. Code schreiben, um die Daten abzufragen und zu parsen/deserialisieren.
+_Es ist je eine URL fur den Abruf von XML- und JSON-Daten gegeben. Code schreiben, um die Daten abzufragen und zu parsen/deserialisieren._
 
 
 ### XML Parsen
@@ -53,9 +53,20 @@ func getJSONData() -> [String] {
     }
 ```
 
+Doku Auszug aus der Klasse JSONSerialization:
+
+```code
+An object that may be converted to JSON must have the following properties:
+
+* The top level object is an Array or Dictionary.
+* All objects are instances of String, Number, Array, Dictionary, or NSNull.  
+* All dictionary keys are instances of String.  
+* Numbers are not NaN or infinity.
+```
+
 ## 2. Optionals
 
-Die 2 Arten von Optionals beschreiben.
+_Die 2 Arten von Optionals beschreiben._
 
 Datentyp Optional: <DatenTyp>?  
 Ein Optional-Typ kann auch keinen Wert, also nil sein.  
@@ -84,17 +95,96 @@ Mit dem !-Operator sagt man dem Compiler, dass man sicher ist das der Optionalwe
 
 ## 3. Storyboards, ViewControllers
 
-Das Storyboard beschreiben und den Zusammenhang zwischen Storyboard und Code (UIViewController) erklären. Beschreiben, wie IBOutlets/IBActions erstellt werden können.
+_Das Storyboard beschreiben und den Zusammenhang zwischen Storyboard und Code (UIViewController) erklären. Beschreiben, wie IBOutlets/IBActions erstellt werden können._
 
 ## 4. TableView, hierachische Navigation
 
-Das Zusammenspiel von UITableView, UITableViewDelegate und UITableViewDataSource erklären. Den vollständigen Code schreiben um eine View in einem UINavigationViewController zu öffnen und
-schliessen. Entsprach mehr oder weniger der Ubung 4.
+_Das Zusammenspiel von UITableView, UITableViewDelegate und UITableViewDataSource erklären. Den vollständigen Code schreiben um eine View in einem UINavigationViewController zu öffnen und
+schliessen. Entsprach mehr oder weniger der Ubung 4._
 
 ## 5. Nebenläufigkeit
 
-Grand Central Dispatch und Dispatch Queues beschreiben und deren Unterschied erklären.
+_Grand Central Dispatch und Dispatch Queues beschreiben und deren Unterschied erklären._
 
+2 mächtige Mechanismen für asynchrone Tasks
+
+* __GCD: Grand Central Dispatch__
+* __Operation Queues__
+
+### Grand Central Dispatch
+
+Grand Central Dispatch (GCD) comprises language features, runtime libraries, and system enhancements that provide systemic, comprehensive improvements to the support for concurrent code execution on multicore hardware in iOS and Mac OS X.
+
+GCD: Beispiel-Code:
+
+```swift
+let myQueue = DispatchQueue(label: "ch.hslu.ios.MyQueue")
+myQueue.async { print("Do some work here.") }
+print("The first block may or may not have run.")
+myQueue.sync { print("Do some more work here.") }
+print("Both blocks have completed.")
+```
+
+Ausgabe:
+
+```code
+Do some work here.
+The first block may or may not have run.
+Do some more work here.
+Both blocks have completed.
+```
+
+GCD provides and manages FIFO queues to 
+which your applicaFon can submit tasks in the 
+form of block objects. Blocks submiLed to 
+dispatch queues are executed __on a pool of 
+threads fully managed by the system.__ No 
+guarantee is made as to the thread on which a 
+task executes.
+
+### Operation Queues
+
+__Grundidee__
+
+1. Nebenläufige Aufgaben in Operations definieren
+2. Operations einer Operation Queue hinzufügen
+3. Operation Queue kümmert sich um Operations und führt diese aus
+
+Beispiel Code:
+
+```swift
+@IBAction func testOperationQueueButtonPressed(_ sender: UIButton) {
+    var orderArray : [String] = []
+    //Erstellt 3 Block Operations
+    let blockOp1 = BlockOperation{
+        orderArray.append("1")
+    }
+    let blockOp2 = BlockOperation{
+        orderArray.append("2")
+    }
+    let blockOp3 = BlockOperation{
+        orderArray.append("3")
+    }
+    //Definieren Anhängigkeiten zwischen den Operations
+    blockOp1.addDependency(blockOp2)
+    blockOp1.addDependency(blockOp3)
+    blockOp2.addDependency(blockOp3)
+    //ERstellt Operation Queue und fügt Operations hinzu
+    let lucasqueueue = OperationQueue() 
+    let blockarray : [BlockOperation] = [blockOp1,blockOp2,blockOp3]
+    lucasqueueue.addOperations(blockarray, waitUntilFinished: true)
+    
+    var alertmessage = "The three Block operations were executed in the following order:" + orderArray.description
+
+    let alert = UIAlertController(title: "Block Operation Orderung", message: alertmessage, preferredStyle: .alert)
+    
+    alert.addAction(UIAlertAction(title: "Ok, thanks", style: .default, handler: nil))
+    
+    self.present(alert, animated: true)
+    
+    
+}
+```
 ## 6 Persistenz
 
-Code schreiben um einen Integer-Wert aus den UserDefaults abzurufen, hochzuz¨ahlen und wieder in den UserDefaults zu speichern.
+_Code schreiben um einen Integer-Wert aus den UserDefaults abzurufen, hochzuzählen und wieder in den UserDefaults zu speichern._
