@@ -97,6 +97,8 @@ let assumedString: String! = "An implicity unwrapped optional string."
 let implicitString: String = assumedString // no need for an exclamation mark
 ```
 
+*Because the value of an implicitly unwrapped optional is automatically unwrapped when you use it, there’s no need to use the ! operator to unwrap it. That said, if you try to use an implicitly unwrapped optional that has a value of nil, you’ll get a runtime error.*
+
 
 ## 3. Storyboards, ViewControllers
 
