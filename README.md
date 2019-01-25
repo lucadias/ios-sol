@@ -181,6 +181,10 @@ Beispiel Code:
 }
 ```
 
+Ausgabe:  
+__Block Operation Ordering__  
+The three block operations were executed in the following order: 3, 2, 1.
+
 ### GCD vs. Operation Queues
 
 Gründe für __Op-Queues__ könnten sein:
@@ -197,3 +201,30 @@ Gründe für __GCD__ könnten sein:
 ## 6 Persistenz
 
 _Code schreiben um einen Integer-Wert aus den UserDefaults abzurufen, hochzuzählen und wieder in den UserDefaults zu speichern._
+
+All iOS apps have a built in data dictionary that stores small amounts of user settings for as long as the app is installed. This system, called UserDefaults can save integers, booleans, strings, arrays, dictionaries, dates and more, but you should be careful not to save too much data because it will slow the launch of your app.
+
+Beispiel Code:
+
+```swift
+//Get UserDefaults Singleton Object
+let defaults = UserDefaults.standard
+//Set UserDefault Variables
+defaults.set(25, forKey: "Age")
+defaults.set(true, forKey: "UseTouchID")
+defaults.set(CGFloat.pi, forKey: "Pi")
+//Get UserDefaultVaraibles
+let age = defaults.integer(forKey: "Age")
+let useTouchID = defaults.bool(forKey: "UseTouchID")
+let pi = defaults.double(forKey: "Pi")
+```
+
+__Achtung:__ Accessor-Methoden nach Datentypen
+
+```swift
+.object(forKey: "key")
+.integer(forKey: "key")
+.string(forKey: "key")
+.array(forKey: "key")
+.url(forKey: "key")
+```
