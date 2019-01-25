@@ -1,6 +1,6 @@
 # Braindump Solutions
 
- <i style=float:right;>dias</i> <br>
+ <i style=float:right;>paiva dias & gruber</i> <br>
 
 ## 1. Kommunikation
 
