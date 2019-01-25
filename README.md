@@ -165,26 +165,35 @@ Beispiel Code:
     let blockOp3 = BlockOperation{
         orderArray.append("3")
     }
-    //Definieren Anhängigkeiten zwischen den Operations
+    //Definieren der Abhängigkeiten zwischen den Operations
     blockOp1.addDependency(blockOp2)
     blockOp1.addDependency(blockOp3)
     blockOp2.addDependency(blockOp3)
-    //ERstellt Operation Queue und fügt Operations hinzu
+    //Erstellt Operation Queue und fügt Operations hinzu
     let lucasqueueue = OperationQueue() 
     let blockarray : [BlockOperation] = [blockOp1,blockOp2,blockOp3]
     lucasqueueue.addOperations(blockarray, waitUntilFinished: true)
-    
+    //Alermessage mit der Auswertung der BlockOperations
     var alertmessage = "The three Block operations were executed in the following order:" + orderArray.description
-
     let alert = UIAlertController(title: "Block Operation Orderung", message: alertmessage, preferredStyle: .alert)
-    
     alert.addAction(UIAlertAction(title: "Ok, thanks", style: .default, handler: nil))
-    
     self.present(alert, animated: true)
-    
-    
 }
 ```
+
+### GCD vs. Operation Queues
+
+Gründe für __Op-Queues__ könnten sein:
+
+* High(er)-level Abstraktion
+* OO: Arbeiten mit Objekten..
+
+Gründe für __GCD__ könnten sein:
+
+* Funktionalität (GCD bietet mehr Möglichkeiten als OperationQueues)
+* Performance (GCD weniger Overhead, etwas performanter als OperationQueues)
+
+
 ## 6 Persistenz
 
 _Code schreiben um einen Integer-Wert aus den UserDefaults abzurufen, hochzuzählen und wieder in den UserDefaults zu speichern._
