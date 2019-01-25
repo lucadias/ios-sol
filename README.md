@@ -143,7 +143,7 @@ Both blocks have completed.
 
 GCD provides and manages FIFO queues to 
 which your application can submit tasks in the 
-form of block objects. Blocks submiLed to 
+form of block objects. Blocks submited to 
 dispatch queues are executed __on a pool of 
 threads fully managed by the system.__ No 
 guarantee is made as to the thread on which a 
