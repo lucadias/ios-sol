@@ -84,7 +84,15 @@ Mit dem !-Operator sagt man dem Compiler, dass man sicher ist das der Optionalwe
 
 ## 3. Storyboards, ViewControllers
 
-Das Storyboard beschreiben und den Zusammenhang zwischen Storyboard und Code (UIViewController) erklären. Beschreiben, wie IBOutlets/IBActions erstellt werden können.
+**Das Storyboard beschreiben und den Zusammenhang zwischen Storyboard und Code (UIViewController) erklären. Beschreiben, wie IBOutlets/IBActions erstellt werden können.**
+
+Storyboards sind die visuelle Repräsentation der UserInterfaces einer iOS-Applikation. Stellt verschiedene Szenen (Scene) und die Verbindungen (Seque) dazwischen dar.
+
+Über IBOutlet& IBAction kann man das Layout (Storyboard) mit dem Code (UIViewController) verbinden.
+
+Deklaration über ``` @IBOutlet weak var myLabel: UILabel! ```. Anschliessend mit **ctrl** + Mausklick in Code ziehen. Falls IBOutlet noch nicht vorhanden, wird dieser direkt erstellt.
+
+IBAction verbindet eine Funktion. Achtung keinen Rückgabewert (Rückgabetyp *void*).
 
 ## 4. TableView, hierachische Navigation
 
