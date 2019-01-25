@@ -1,6 +1,6 @@
 # Braindump Solutions
 
- <i style=float:right;>dias</i> <br>
+ <i style=float:right;>paiva dias & gruber</i> <br>
 
 ## 1. Kommunikation
 
@@ -19,7 +19,8 @@ Code Beispiel:
 ```swift
 func getXMLData() -> [String] {
     tmpXmlStrings = []
-    parser = XMLParser(contentsOf: URL(string:          "http://wherever.ch/hslu/iPhoneAdressData.xml")!)!
+    parser = XMLParser(contentsOf: URL(string:                 
+        "http://wherever.ch/hslu/iPhoneAdressData.xml")!)!
     parser.delegate = self
     parser.parse()
     return tmpXmlStrings
@@ -34,7 +35,11 @@ Code Beispiel:
 func getJSONData() -> [String] {
         tmpJSONStrings = []
         var tempString = ""
-        let json2 = try! JSONSerialization.jsonObject(with: Data(contentsOf: URL(string: "http://wherever.ch/hslu/iPhoneAdressData.json")!), options: JSONSerialization.ReadingOptions.mutableContainers) as? [Any]
+        let json2 = try! JSONSerialization.jsonObject(with: Data(
+                contentsOf: URL(
+                string: "http://wherever.ch/hslu/iPhoneAdressData.json")!),
+                options: JSONSerialization.ReadingOptions.mutableContainers) 
+                as? [Any]
         if let array = json2 {
                 for object in array {
                     if let dictionary = object as? [String: Any] {
@@ -68,30 +73,32 @@ An object that may be converted to JSON must have the following properties:
 
 _Die 2 Arten von Optionals beschreiben._
 
-Datentyp Optional: <DatenTyp>?  
-Ein Optional-Typ kann auch keinen Wert, also nil sein.  
-Nicht optionale Typen dürfen nicht nil sein und verursachen einen Laufzeitfehler.  
-Das heisst Klassen, Structs und Enums müssen immer einen Wert != nil haben.  
-Bsp. :
-```swift
-let convNumber : Int = Int(“1234“) 
-//Argument ist ein Stringà kann also nicht zugeordnet werden
-let convNumber : Int? = Int(“1234“) 
-//Zuweisung an Int-Optional möglich
-
--> Ausgabe von
-    let convNumber : Int? = Int(“1234“)
-    print(convNumber)
-
-        -> Optional(1234)
-```
-
-Zugriff auf Optional-Werte via __Forced-Unwrapping__ (__!__-Operator):  
+Optional:
+es kann sein, dass kein Wert vorhanden ist (__?__-Operator)
 
 ```swift
-let number : Int = convNumber!
+let convNumb : Int? = Int("1234")
 ```
+
+__Forced-Unwrapping:__  
+Zugriff auf Optional-Werte
+
+```swift
+let number : Int = convNumb!
+```
+
 Mit dem !-Operator sagt man dem Compiler, dass man sicher ist das der Optionalwert != nil ist, falls er doch nil ist gibt es einen __Laufzeitfehler__.
+
+__Implicity Unwrapped Optionals:__  
+Optionals, die immer einen Wert haben (sollten)
+
+```swift
+let assumedString: String! = "An implicity unwrapped optional string."
+let implicitString: String = assumedString // no need for an exclamation mark
+```
+
+*Because the value of an implicitly unwrapped optional is automatically unwrapped when you use it, there’s no need to use the ! operator to unwrap it. That said, if you try to use an implicitly unwrapped optional that has a value of nil, you’ll get a runtime error.*
+
 
 ## 3. Storyboards, ViewControllers
 
@@ -164,8 +171,8 @@ Both blocks have completed.
 ```
 
 GCD provides and manages FIFO queues to 
-which your applicaFon can submit tasks in the 
-form of block objects. Blocks submiLed to 
+which your application can submit tasks in the 
+form of block objects. Blocks submited to 
 dispatch queues are executed __on a pool of 
 threads fully managed by the system.__ No 
 guarantee is made as to the thread on which a 
