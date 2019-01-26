@@ -25,6 +25,14 @@ func getXMLData() -> [String] {
     parser.parse()
     return tmpXmlStrings
 }
+
+func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String]) {
+    if(attributeDict["firstName"] != nil){
+        var tempString = attributeDict["firstName"] ?? ""
+        tempString +=  " " + attributeDict["lastName"]!
+        tmpXmlStrings.append(tempString)
+    }
+}
 ```
 
 ### JSON Parsen
